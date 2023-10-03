@@ -1,69 +1,62 @@
 import React, { useState } from 'react';
-
-const tableStyle = {
-    width: '100%',
-    borderCollapse: 'collapse',
-    marginTop: '20px',
-};
-
-const thStyle = {
-    background: '#f2f2f2',
-    fontWeight: 'bold',
-    textAlign: 'left',
-    padding: '8px',
-};
-
-const tdStyle = {
-    border: '1px solid #ddd',
-    padding: '8px',
-};
+import styles from './Todos.module.css'
 
 function Todos() {
     const [text, setText] = useState("")
     const [todos, setTodos] = useState([])
     const handleText = (e) => {
         const val = e.target.value
-        console.log(val)
         return setText(val)
     }
 
     const handleTodo = () => {
         const currentTimeInIST = new Date().toLocaleString();
-        const newArr = [...todos, { Todo: text, Time: currentTimeInIST, status: false }]
+        const newArr = [...todos, { Todo: text, Time: currentTimeInIST, status: false, id: Date.now() }]
         setTodos(newArr)
         setText("")
     }
 
-    const handleToggle=()=>{
-        
+    const handleToggle=(e,id)=>{
+        const upd= todos.map((E,ID)=>{
+            if(id===ID){
+                return{...E, status:!E.status}
+            }
+            else{
+                return {...E}
+            }
+        })
+        setTodos(upd)
     }
 
-    console.log(todos);
 
     return (
         <div>
             <input type="text" placeholder='Write your todo here' value={text} onChange={handleText} />
             <button onClick={handleTodo} >ADD</button>
-            <table style={tableStyle} >
+            <table className={styles.tableStyle} >
                 <thead>
+                    { todos.length>0 ?
                     <tr>
-                        <th style={thStyle} >Todo</th>
-                        <th style={thStyle} >Time</th>
-                        <th style={thStyle} >Status</th>
-                        <th style={thStyle} >Toggle</th>
+                        <th className={styles.thStyle} >Todo</th>
+                        <th className={styles.thStyle} >Time</th>
+                        <th className={styles.thStyle} >Status</th>
+                        <th className={styles.thStyle} >Toggle</th>
                     </tr>
+                    :
+                        ""
+                        }
                 </thead>
                 <tbody>
                     {
                         todos.map((e, id) => {
                             return <tr key={id}>
-                                <td style={tdStyle} > {e.Todo} </td>
-                                <td style={tdStyle} > {e.Time} </td>
-                                <td style={tdStyle} >
-                                    {e.status ? 'completed' : 'Pending'}
+                                <td className={styles.tdStyle} > {e.Todo} </td>
+                                <td className={styles.tdStyle} > {e.Time} </td>
+                                <td className={styles.tdStyle} >
+                                    {e.status ? 'Completed' : 'Pending'}
                                 </td>
-                                <td style={tdStyle} >
-                                    {e.status ? <button onClick={handleToggle} >Mark as pending</button> : <button onClick={handleToggle} >Mark as completed</button> }
+                                <td className={styles.tdStyle} >
+                                    {e.status ? <button onClick={()=>handleToggle(e,id)} >Mark as pending</button> : <button onClick={()=>handleToggle(e,id)} >Mark as completed</button> }
                                 </td>
                             </tr>
                         })
