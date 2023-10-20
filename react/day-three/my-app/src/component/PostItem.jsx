@@ -29,7 +29,6 @@ function PostItem() {
     const handlePrev=(page)=>{
         setPage(page-1)
     }
-
     const handleNext=(page)=>{
         setPage(page+1)
     }

@@ -43,7 +43,7 @@ function Todos() {
                         <th className={styles.thStyle} >Toggle</th>
                     </tr>
                     :
-                        ""
+                    ""
                         }
                 </thead>
                 <tbody>
@@ -65,7 +65,6 @@ function Todos() {
             </table>
         </div>
     )
-
 }
 
 export default Todos
