@@ -12,7 +12,8 @@ function PostItem() {
     }, [page])
     
     function getData(page) {
-        return fetch(`https://jsonplaceholder.typicode.com/posts?_limit=11&_page=${page}`).then((res) => res.json())
+        return fetch(`https://jsonplaceholder.typicode.com/posts?_limit=11&_page=${page}`)
+        .then((res) => res.json())
     }
 
     async function fetchAndUpdate(page) {
