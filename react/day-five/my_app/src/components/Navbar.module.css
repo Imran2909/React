@@ -1,0 +1,16 @@
+.navlight{
+    display: flex;
+    justify-content: space-evenly;
+    border: 1px solid red;
+    transition: 1s;
+    /* color: white;
+    background-color: black; */
+}
+.navdark{
+    display: flex;
+    justify-content: space-evenly;
+    border: 1px solid red;
+    color: white;
+    background-color: black;
+    transition: 1s;
+}

@@ -1,23 +1,20 @@
 import { useRef, useState } from 'react';
-import Timer from './Timer';
 import './App.css';
+import Navbars from "./components/Navbars"
+import {AppContext} from './contexts/AppContext'
+import {useContext} from 'react';
+import { AuthContext } from './contexts/AuthContext';
 
 function App() {
-  const [val, setVal] = useState(0);
-  const inpRef= useRef([]);
-
-  const handleClick=()=>{
-    console.log(inpRef)
-  }
-  
+  const val=useContext(AppContext);    
+  const authVal=useContext(AuthContext);
+  // console.log("in navbar ", val.theme);
   return (
     <div className="App">
-      <Timer/>
-      {/* <input id="1" type="text" ref={(elem)=>{inpRef.current[0]=elem.innerText}} />
-      <input id="2" type="text" ref={(elem)=>{inpRef.current[1]=elem.innerText}} />
-      <input id="3" type="text" ref={(elem)=>{inpRef.current[2]=elem.innerText}} />
-      <input id="4" type="text" ref={(elem)=>{inpRef.current[3]=elem.innerText}} />
-     <button onClick={handleClick} >PRINT</button> */}
+
+      <Navbars/>
+      <button onClick={()=>{val.toggle()}} >toggle theme</button>
+      <button onClick={()=>{authVal.toggle()}} >toggle Auth</button>
      </div>
      )
 }
